@@ -5,6 +5,19 @@ const PORT = 3000;
 // 서버 생성
 const app = express();
 
+// 미들웨어 설정
+app.use((req, res, next) => {
+  const start = Date.now();
+  next();
+  const diffTime = Date.now() - start;
+  //단순 디버깅용
+  console.log(`${req.method} ${req.url} ${diffTime}ms`);
+  //운영환경에서 로깅용
+  res.on("finish", () => {
+    console.log(`${req.method} ${req.url} ${diffTime}ms`);
+  });
+});
+
 // 라우터 설정
 app.get("/", (req, res) => {
   res.send("This is Express Server");
