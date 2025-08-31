@@ -1,5 +1,6 @@
 const express = require("express");
 const PORT = 3000;
+const path = require("path");
 const usersRouter = require("./routes/users.router");
 const postsRouter = require("./routes/posts.router");
 
@@ -8,6 +9,10 @@ const app = express();
 
 // JSON 데이터 파싱 bodyParser대용
 app.use(express.json());
+
+// 정적 파일 제공 (절대경로)
+app.use("/static", express.static(path.join(__dirname, "public")));
+
 // 미들웨어 설정
 app.use((req, res, next) => {
   const start = Date.now();
