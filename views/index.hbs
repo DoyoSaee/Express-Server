@@ -1,0 +1,33 @@
+
+      <h1>{{currentImage.name}}</h1>
+      <!-- 상단 썸네일 캐러셀 -->
+      <div class="thumbnail-row">
+        {{#each images}}
+        <div class="thumbnail {{#if (eq this.id ../selectedImage)}}selected{{/if}}" onclick="changeImage({{this.id}})">
+          <img src="/static/images/{{this.id}}.jpg" alt="{{this.name}}" />
+        </div>
+        {{/each}}
+      </div>
+
+      <!-- 중앙 메인 이미지 -->
+      <div class="main-image-container">
+        <div class="main-image-card">
+          <img
+            id="main-image"
+            src="/static/images/{{currentImage.id}}.jpg"
+            alt="{{currentImage.name}}"
+            class="main-image"
+          />
+          <div class="image-title">
+            <h3 id="main-image-title">{{currentImage.name}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 이미지 변경 함수 - 서버로 리다이렉트하여 새로운 데이터 받기
+      function changeImage(imageNumber) {
+        window.location.href = `/?image=${imageNumber}`;
+      }
+    </script>

@@ -2,14 +2,150 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
     <title>Document</title>
+    <style>
+      body {
+        background-color: #f3f4f6;
+        min-height: 100vh;
+        padding: 2rem 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      .thumbnail-row {
+        display: flex;
+        justify-content: center;
+        gap: 0.25rem;
+        flex-wrap: nowrap;
+        margin-bottom: 2rem;
+      }
+      .thumbnail {
+        flex-shrink: 0;
+        cursor: pointer;
+        transition: all 0.3s;
+        border-radius: 0.25rem;
+        overflow: hidden;
+      }
+      .thumbnail:hover {
+        box-shadow: 0 0 0 1px #93c5fd;
+      }
+      .thumbnail.selected {
+        box-shadow: 0 0 0 2px #3b82f6;
+      }
+      .thumbnail img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        display: block;
+      }
+      .main-image-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+      .main-image-card {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 1000px;
+        width: 100%;
+      }
+      .main-image {
+        width: 100%;
+        height: 600px;
+        object-fit: cover;
+      }
+      .image-title {
+        padding: 1rem;
+        text-align: center;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #374151;
+      }
+      h1 {
+        font-size: 2.25rem;
+        font-weight: bold;
+        text-align: center;
+        color: #1f2937;
+        margin-bottom: 2rem;
+      }
+    </style>
   </head>
   <body>
-    <h1>쿼리 최적화 전략</h1>
+    <div class="container">
+      <h1>쿼리 최적화 전략</h1>
+
+      <!-- 상단 썸네일 캐러셀 -->
+      <div class="thumbnail-row">
+        <div class="thumbnail selected" onclick="changeImage(1)">
+          <img src="/static/images/1.jpg" alt="Thumbnail 1" />
+        </div>
+        <div class="thumbnail" onclick="changeImage(2)">
+          <img src="/static/images/2.jpg" alt="Thumbnail 2" />
+        </div>
+        <div class="thumbnail" onclick="changeImage(3)">
+          <img src="/static/images/3.jpg" alt="Thumbnail 3" />
+        </div>
+        <div class="thumbnail" onclick="changeImage(4)">
+          <img src="/static/images/4.jpg" alt="Thumbnail 4" />
+        </div>
+        <div class="thumbnail" onclick="changeImage(5)">
+          <img src="/static/images/5.jpg" alt="Thumbnail 5" />
+        </div>
+        <div class="thumbnail" onclick="changeImage(6)">
+          <img src="/static/images/6.jpg" alt="Thumbnail 6" />
+        </div>
+        <div class="thumbnail" onclick="changeImage(7)">
+          <img src="/static/images/7.jpg" alt="Thumbnail 7" />
+        </div>
+        <div class="thumbnail" onclick="changeImage(8)">
+          <img src="/static/images/8.jpg" alt="Thumbnail 8" />
+        </div>
+        <div class="thumbnail" onclick="changeImage(9)">
+          <img src="/static/images/9.jpg" alt="Thumbnail 9" />
+        </div>
+        <div class="thumbnail" onclick="changeImage(10)">
+          <img src="/static/images/10.jpg" alt="Thumbnail 10" />
+        </div>
+      </div>
+
+      <!-- 중앙 메인 이미지 -->
+      <div class="main-image-container">
+        <div class="main-image-card">
+          <img
+            id="main-image"
+            src="/static/images/1.jpg"
+            alt="Main Image"
+            class="main-image"
+          />
+          <div class="image-title">
+            <h3 id="main-image-title">Image 1</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
-      for (let i = 1; i <= 10; i++) {
-        document.write(`<img src="images/${i}.jpg" alt="${i}" />`);
+      function changeImage(imageNumber) {
+        const mainImage = document.getElementById("main-image");
+        const mainImageTitle = document.getElementById("main-image-title");
+
+        // 메인 이미지 변경
+        mainImage.src = `/static/images/${imageNumber}.jpg`;
+        mainImage.alt = `Main Image ${imageNumber}`;
+        mainImageTitle.textContent = `Image ${imageNumber}`;
+
+        // 모든 썸네일에서 선택 상태 제거
+        document.querySelectorAll(".thumbnail").forEach((thumb) => {
+          thumb.classList.remove("selected");
+        });
+
+        // 선택된 썸네일에 선택 상태 추가
+        event.currentTarget.classList.add("selected");
       }
     </script>
   </body>
