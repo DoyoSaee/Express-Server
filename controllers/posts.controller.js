@@ -1,11 +1,7 @@
+const path = require("path");
+
 function getPost(req, res) {
-  res.send(`
-    <div>
-      <h1>
-        <p>POST통신</p>
-      </h1>
-    </div>
-  `);
+  res.sendFile(path.join(__dirname, "..", "public", "images", "1.jpg"));
 }
 
 module.exports = {
